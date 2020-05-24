@@ -7,18 +7,24 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }) => {
-  return { props: { id: params.id } };
+export const getStaticProps = async ({ params, preview }) => {
+  const isPreview = preview || false;
+  return { props: { id: params.id, previewMode: isPreview } };
 };
 
-const Post = ({ id }) => {
+const Post = ({ id, previewMode }) => {
   const router = useRouter();
 
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  return <h1>{`Page's ID is ${id}`}</h1>;
+  return (
+    <>
+      {previewMode ? 'Preview mode' : ''}
+      <h1>{`Page's ID is ${id}`}</h1>
+    </>
+  );
 };
 
 export default Post;
