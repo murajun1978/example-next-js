@@ -23,6 +23,9 @@ const Post = ({ id, previewMode }) => {
     <>
       {previewMode ? 'Preview mode' : ''}
       <h1>{`Page's ID is ${id}`}</h1>
+      {previewMode ? (
+        <a href="/api/preview-disable">Disable preview mode</a>
+      ) : null}
     </>
   );
 };
